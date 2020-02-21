@@ -1,11 +1,12 @@
 # coding: utf-8
 import sys, os
-sys.path.append(os.pardir)  # 부모 디렉터리의 파일을 가져올 수 있도록 
+sys.path.append(os.path.dirname(os.path.abspath(os.path.dirname(__file__))))  # 부모 디렉터리의 파일을 가져올 수 있도록 
 import numpy as np
 import pickle
 from dataset.mnist import load_mnist
 from common.functions import sigmoid, softmax
-
+THIS_FOLDER = os.path.dirname(os.path.abspath(__file__))
+my_file = os.path.join(THIS_FOLDER, 'sample_weight.pkl')
 
 def get_data():
     (x_train, t_train), (x_test, t_test) = load_mnist(normalize=True, flatten=True, one_hot_label=False)
@@ -13,6 +14,7 @@ def get_data():
 
 
 def init_network():
+    #C:\\Users\\falle\\OneDrive\\문서\\GitHub\\deep-learning-from-scratch\\ch03\\
     with open("sample_weight.pkl", 'rb') as f:
         network = pickle.load(f)
     return network
